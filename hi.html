@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yogendra Singh – IT Manager &amp; Healthcare Tech Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0a0f2e;
+    --navy-mid: #111836;
+    --navy-light: #1a2450;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --accent3: #10b981;
+    --gold: #f59e0b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --card: rgba(255,255,255,0.04);
+    --card-hover: rgba(0,212,255,0.06);
+    --border: rgba(255,255,255,0.08);
+    --border-accent: rgba(0,212,255,0.3);
+    --font: 'Space Grotesk', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .orb {
+    position: fixed; border-radius: 50%;
+    filter: blur(100px); pointer-events: none; z-index: 0;
+    animation: drift 20s ease-in-out infinite alternate;
+  }
+  .orb-1 { width: 600px; height: 600px; top: -200px; left: -200px; background: rgba(124,58,237,0.12); }
+  .orb-2 { width: 500px; height: 500px; bottom: -100px; right: -100px; background: rgba(0,212,255,0.08); animation-delay: -10s; }
+  .orb-3 { width: 300px; height: 300px; top: 40%; left: 30%; background: rgba(16,185,129,0.06); animation-delay: -5s; }
+
+  @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,40px) scale(1.1); } }
+
+  .page { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .header {
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem;
+    align-items: start; padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .header-name {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .header-title {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0.6rem 0;
+  }
+  .header-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  .status-badge {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);
+    padding: 0.4rem 0.9rem; border-radius: 100px;
+    font-family: var(--mono); font-size: 0.72rem;
+    color: var(--accent3); font-weight: 500;
+    margin-top: 0.5rem; align-self: start;
+    white-space: nowrap;
+  }
+  .status-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent3);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+  .contact-bar {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-top: 1.2rem;
+  }
+  .contact-chip {
+    display: flex; align-items: center; gap: 0.4rem;
+    padding: 0.35rem 0.8rem; border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--card); font-size: 0.82rem;
+    color: var(--text-muted); text-decoration: none;
+    transition: all 0.2s;
+  }
+  .contact-chip:hover { border-color: var(--border-accent); color: var(--accent); background: var(--card-hover); }
+  .contact-chip svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.2rem;
+    transition: all 0.25s; cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .stat-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .stat-card:hover::before { opacity: 0.05; }
+  .stat-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+  .stat-num {
+    font-size: 2rem; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1; position: relative;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; position: relative; }
+
+  .section { margin-bottom: 2.5rem; }
+  .section-header {
+    display: flex; align-items: center; gap: 0.7rem;
+    margin-bottom: 1.2rem;
+  }
+  .section-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--text-muted);
+  }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  .exp-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.4rem 1.6rem;
+    margin-bottom: 1rem; position: relative;
+    transition: all 0.25s; cursor: pointer;
+    overflow: hidden;
+  }
+  .exp-card::after {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    border-radius: 3px 0 0 3px;
+    transform: scaleY(0); transform-origin: top;
+    transition: transform 0.3s ease;
+  }
+  .exp-card:hover::after, .exp-card.active::after { transform: scaleY(1); }
+  .exp-card:hover, .exp-card.active { border-color: rgba(0,212,255,0.2); background: var(--card-hover); }
+
+  .exp-header {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 0.5rem; align-items: start;
+  }
+  .exp-role { font-size: 1rem; font-weight: 600; color: #fff; }
+  .exp-company { font-size: 0.85rem; color: var(--accent); margin-top: 0.15rem; }
+  .exp-period {
+    font-family: var(--mono); font-size: 0.72rem;
+    color: var(--text-dim); background: rgba(255,255,255,0.05);
+    padding: 0.25rem 0.6rem; border-radius: 100px;
+    white-space: nowrap; align-self: start;
+  }
+  .exp-current {
+    font-family: var(--mono); font-size: 0.65rem;
+    color: var(--accent3); background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.25);
+    padding: 0.2rem 0.55rem; border-radius: 100px;
+    display: inline-block; margin-top: 0.3rem; margin-left: 0.5rem;
+  }
+
+  .exp-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.3s;
+  }
+  .exp-card.active .exp-body { max-height: 500px; margin-top: 1rem; }
+
+  .exp-body ul { list-style: none; }
+  .exp-body ul li {
+    padding: 0.3rem 0 0.3rem 1.2rem;
+    font-size: 0.87rem; color: var(--text-muted);
+    line-height: 1.55; position: relative;
+  }
+  .exp-body ul li::before {
+    content: '\25B8'; position: absolute; left: 0;
+    color: var(--accent); font-size: 0.75rem; top: 0.35rem;
+  }
+
+  .exp-toggle {
+    font-family: var(--mono); font-size: 0.7rem;
+    color: var(--text-dim); margin-top: 0.6rem;
+    transition: color 0.2s;
+  }
+  .exp-card:hover .exp-toggle { color: var(--accent); }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .skill-category {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.2rem 1.4rem;
+    transition: all 0.25s;
+  }
+  .skill-category:hover { border-color: var(--border-accent); background: var(--card-hover); }
+  .skill-cat-name {
+    font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 0.8rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag {
+    padding: 0.3rem 0.65rem; border-radius: 6px;
+    font-family: var(--mono); font-size: 0.72rem;
+    font-weight: 500; border: 1px solid;
+    cursor: default; transition: all 0.2s;
+  }
+  .tag-blue   { color: #60a5fa; border-color: rgba(96,165,250,0.25); background: rgba(96,165,250,0.08); }
+  .tag-purple { color: #a78bfa; border-color: rgba(167,139,250,0.25); background: rgba(167,139,250,0.08); }
+  .tag-green  { color: #34d399; border-color: rgba(52,211,153,0.25); background: rgba(52,211,153,0.08); }
+  .tag-amber  { color: #fbbf24; border-color: rgba(251,191,36,0.25); background: rgba(251,191,36,0.08); }
+  .tag-pink   { color: #f472b6; border-color: rgba(244,114,182,0.25); background: rgba(244,114,182,0.08); }
+  .skill-tag:hover { transform: translateY(-1px); filter: brightness(1.2); }
+
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+    transition: all 0.25s;
+  }
+  .edu-card:hover { border-color: var(--border-accent); background: var(--card-hover); transform: translateY(-2px); }
+  .edu-degree { font-size: 0.92rem; font-weight: 600; color: #fff; }
+  .edu-inst { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+  .edu-year {
+    font-family: var(--mono); font-size: 0.7rem;
+    color: var(--accent); margin-top: 0.5rem;
+  }
+
+  .terminal {
+    background: #0d1117; border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 14px; overflow: hidden;
+  }
+  .terminal-bar {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,255,255,0.04); padding: 0.7rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .terminal-body { padding: 1.4rem; font-family: var(--mono); font-size: 0.82rem; line-height: 2; }
+  .t-prompt { color: var(--accent3); }
+  .t-cmd { color: #fff; }
+  .t-key { color: var(--accent2); }
+  .t-val { color: var(--accent); }
+  .t-str { color: #fbbf24; }
+  .t-comment { color: var(--text-dim); }
+
+  .footer {
+    margin-top: 3rem; padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-text { font-size: 0.78rem; color: var(--text-dim); font-family: var(--mono); }
+
+  .print-btn {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    color: #fff; border: none; padding: 0.7rem 1.2rem;
+    border-radius: 100px; font-family: var(--font);
+    font-size: 0.82rem; font-weight: 600;
+    cursor: pointer; display: flex; align-items: center; gap: 0.4rem;
+    transition: all 0.2s; z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,212,255,0.2);
+  }
+  .print-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,212,255,0.3); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  @media (max-width: 700px) {
+    .header { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .two-col, .skills-grid { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    body::before, .orb, .print-btn { display: none; }
+    body { background: #fff; color: #111; }
+    .stat-card, .exp-card, .skill-category, .edu-card, .terminal {
+      border-color: #ddd !important; background: #f9f9f9 !important;
+    }
+    .header-name { -webkit-text-fill-color: #111 !important; }
+    .exp-body { max-height: none !important; margin-top: 0.5rem !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<div class="page">
+
+  <header class="header">
+    <div>
+      <div class="header-name">Yogendra<br>Singh</div>
+      <div class="header-title">// Assistant IT Manager &middot; Healthcare Tech &middot; Oracle &amp; SQL</div>
+      <div class="header-subtitle">11 years of turning hospital chaos into clean data flows &mdash; one Oracle query at a time.</div>
+      <div class="contact-bar">
+        <a class="contact-chip" href="tel:+918104129754">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z"/></svg>
+          +91 8104129754
+        </a>
+        <a class="contact-chip" href="mailto:Yograj.spd@gmail.com">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Yograj.spd@gmail.com
+        </a>
+        <span class="contact-chip">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Jaipur, Rajasthan &middot; Open to relocate
+        </span>
+      </div>
+    </div>
+    <div>
+      <div class="status-badge"><span class="status-dot"></span>Available for opportunities</div>
+    </div>
+  </header>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">11+</div>
+      <div class="stat-label">Years of Experience</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Organizations Served</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">3</div>
+      <div class="stat-label">HIMS Implementations</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">MCA</div>
+      <div class="stat-label">+ C-DAC Certified</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#9889;</div>
+      <span class="section-title">About</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="terminal-dot" style="background:#ff5f57"></span>
+        <span class="terminal-dot" style="background:#febc2e"></span>
+        <span class="terminal-dot" style="background:#28c840"></span>
+        <span style="margin-left:0.5rem; font-family:var(--mono); font-size:0.72rem; color:#555;">yogendra@career ~ profile.json</span>
+      </div>
+      <div class="terminal-body">
+        <span class="t-prompt">&rarr;</span> <span class="t-cmd">cat profile.json</span><br>
+        <span class="t-comment">// Dynamic IT professional with a surgeon's precision for systems</span><br>
+        {<br>
+        &nbsp;&nbsp;<span class="t-key">"specialization"</span>: <span class="t-str">"Healthcare IT &amp; Hospital Information Systems"</span>,<br>
+        &nbsp;&nbsp;<span class="t-key">"core_stack"</span>: [<span class="t-str">"Oracle DB"</span>, <span class="t-str">"MS SQL Server"</span>, <span class="t-str">"VMware"</span>, <span class="t-str">"Sophos"</span>],<br>
+        &nbsp;&nbsp;<span class="t-key">"superpower"</span>: <span class="t-str">"Making hospital systems not crash at 3AM"</span>,<br>
+        &nbsp;&nbsp;<span class="t-key">"currently"</span>: <span class="t-str">"Asst. IT Manager @ BMCHRC Jaipur"</span>,<br>
+        &nbsp;&nbsp;<span class="t-key">"relocation"</span>: <span class="t-val">true</span>,<br>
+        &nbsp;&nbsp;<span class="t-key">"fun_fact"</span>: <span class="t-str">"Explores new places on a bicycle. Same energy as debugging prod."</span><br>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">&#128188;</div>
+      <span class="section-title">Experience</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="exp-card active" onclick="toggleExp(this)">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Assistant IT Manager <span class="exp-current">&#9679; Current</span></div>
+          <div class="exp-company">Bhagwan Mahaveer Cancer Hospital &amp; Research Centre, Jaipur</div>
+        </div>
+        <div class="exp-period">Oct 2023 &rarr; Present</div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Leading full implementation of Neosoft HIS (from Shivam Medisoft) &mdash; from zero to live across all hospital departments.</li>
+          <li>Managing Oracle DB-backed healthcare applications covering patient management, EHR, billing, inventory, scheduling, and radiology.</li>
+          <li>Owning integration of account and finance modules for seamless financial operations across the hospital.</li>
+          <li>Database design, administration, performance tuning and troubleshooting &mdash; because slow queries cost lives (and money).</li>
+          <li>Mentoring junior IT staff and translating tech-speak into plain English for doctors, admins, and CFOs alike.</li>
+          <li>Cross-functional collaboration with vendors, healthcare professionals and regulators to maintain compliance.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">&#9662; click to collapse</div>
+    </div>
+
+    <div class="exp-card" onclick="toggleExp(this)">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Technical Project Manager</div>
+          <div class="exp-company">Appitron Solutions Pvt Ltd, Jaipur</div>
+        </div>
+        <div class="exp-period">Oct 2022 &rarr; Oct 2023</div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Managed end-to-end app design and delivery from conceptualization through QA &mdash; simultaneously, across multiple projects.</li>
+          <li>Consistent on-time, within-budget delivery through tight resource prioritisation and stakeholder alignment.</li>
+          <li>Translated dense technical jargon into crisp stakeholder updates that people actually read.</li>
+          <li>Led teams with a culture of innovation; anticipated market trends and aligned project goals with org objectives.</li>
+          <li>Sharp risk identification and mitigation &mdash; the IT equivalent of reading the room before the fire starts.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">&#9658; click to expand</div>
+    </div>
+
+    <div class="exp-card" onclick="toggleExp(this)">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">ERP Coordinator</div>
+          <div class="exp-company">Bhagwan Mahaveer Cancer Hospital &amp; Research Centre, Jaipur</div>
+        </div>
+        <div class="exp-period">Feb 2019 &rarr; Oct 2022</div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Windows Server 2012 management &mdash; IIS, FTP, and all the classic server alphabet soup.</li>
+          <li>MS SQL Server administration: routine backups, replication, SSIS/SSRS reporting, GST and Crystal Reports.</li>
+          <li>Authored and enforced org-wide IT Policy for hardware, software and access control.</li>
+          <li>Full IT infrastructure ownership &mdash; hardware, software, networking, training. The hospital's one-person IT army.</li>
+          <li>Implemented HMIS across: Inventory, Pharmacy, Linen, OPD/IPD, Lab, F&amp;B, Dietician, PMS, PCAS and Radiology.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">&#9658; click to expand</div>
+    </div>
+
+    <div class="exp-card" onclick="toggleExp(this)">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Sr. Support &amp; Implementation Executive</div>
+          <div class="exp-company">Asmi Global Software OPC Pvt Ltd, Jaipur</div>
+        </div>
+        <div class="exp-period">Oct 2016 &rarr; Feb 2019</div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>HMIS implementation across full hospital module suite for multiple client hospitals across the region.</li>
+          <li>Managed MS SQL and MySQL databases &mdash; backups, support, and emergency restores from data corruption.</li>
+          <li>Delivered daily/monthly network failure reports to keep stakeholders informed and definitely not panicking.</li>
+          <li>Provided technical support to end users across ERP and Editorial CRM platforms.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">&#9658; click to expand</div>
+    </div>
+
+    <div class="exp-card" onclick="toggleExp(this)">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">IT Assistant</div>
+          <div class="exp-company">Advanced Neurology &amp; Superspeciality Hospital, Jaipur</div>
+        </div>
+        <div class="exp-period">2013 &rarr; Jun 2016</div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Night admissions and patient discharge management &mdash; first real taste of healthcare IT under pressure.</li>
+          <li>Prepared patient discharge summaries and verified medical data accuracy across departments.</li>
+          <li>Built and maintained data backup and disaster recovery procedures &mdash; early career paranoia that paid off later.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">&#9658; click to expand</div>
+    </div>
+  </section>
+
+  <div class="two-col">
+
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">&#128295;</div>
+        <span class="section-title">Tech Stack</span>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="skill-category" style="margin-bottom:0.8rem">
+        <div class="skill-cat-name">Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag tag-blue">Oracle DB</span>
+          <span class="skill-tag tag-blue">MS SQL Server</span>
+          <span class="skill-tag tag-blue">MySQL</span>
+          <span class="skill-tag tag-blue">SSIS</span>
+          <span class="skill-tag tag-blue">SSRS</span>
+          <span class="skill-tag tag-blue">Crystal Reports</span>
+        </div>
+      </div>
+
+      <div class="skill-category" style="margin-bottom:0.8rem">
+        <div class="skill-cat-name">Servers &amp; Infrastructure</div>
+        <div class="skill-tags">
+          <span class="skill-tag tag-purple">Windows Server 2012</span>
+          <span class="skill-tag tag-purple">IIS</span>
+          <span class="skill-tag tag-purple">FTP Server</span>
+          <span class="skill-tag tag-purple">VMware</span>
+          <span class="skill-tag tag-purple">Linux</span>
+          <span class="skill-tag tag-purple">Next Cloud</span>
+          <span class="skill-tag tag-purple">SSH</span>
+        </div>
+      </div>
+
+      <div class="skill-category" style="margin-bottom:0.8rem">
+        <div class="skill-cat-name">Healthcare Systems</div>
+        <div class="skill-tags">
+          <span class="skill-tag tag-green">Neosoft HIS</span>
+          <span class="skill-tag tag-green">OPD/IPD</span>
+          <span class="skill-tag tag-green">Pharmacy</span>
+          <span class="skill-tag tag-green">Lab Mgmt</span>
+          <span class="skill-tag tag-green">Radiology</span>
+          <span class="skill-tag tag-green">EHR</span>
+          <span class="skill-tag tag-green">Billing</span>
+        </div>
+      </div>
+
+      <div class="skill-category" style="margin-bottom:0.8rem">
+        <div class="skill-cat-name">Security &amp; Networking</div>
+        <div class="skill-tags">
+          <span class="skill-tag tag-amber">Sophos Firewall</span>
+          <span class="skill-tag tag-amber">Network Admin</span>
+          <span class="skill-tag tag-amber">Disaster Recovery</span>
+          <span class="skill-tag tag-amber">IT Policy</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <div class="skill-cat-name">Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag tag-pink">Project Management</span>
+          <span class="skill-tag tag-pink">Team Leadership</span>
+          <span class="skill-tag tag-pink">Vendor Management</span>
+          <span class="skill-tag tag-pink">Budget Control</span>
+          <span class="skill-tag tag-pink">Cross-functional</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">&#127891;</div>
+        <span class="section-title">Education</span>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Master of Computer Application (MCA)</div>
+        <div class="edu-inst">S S Jain Subodh PG College, Jaipur</div>
+        <div class="edu-year">// 2016</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">C-DAC Certification</div>
+        <div class="edu-inst">Centre for Development of Advanced Computing</div>
+        <div class="edu-year">// 2016</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+        <div class="edu-inst">Compucom Institute of Technology &amp; Management, Jaipur</div>
+        <div class="edu-year">// 2013</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Senior Secondary + Higher Secondary</div>
+        <div class="edu-inst">Board of Secondary Education, Rajasthan</div>
+        <div class="edu-year">// 2010 &middot; 2008</div>
+      </div>
+
+      <div class="section-header" style="margin-top:1.5rem">
+        <div class="section-icon">&#129517;</div>
+        <span class="section-title">Human Details</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="terminal">
+        <div class="terminal-body" style="padding:1rem 1.4rem; line-height:1.9">
+          <span class="t-key">DOB</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr;&nbsp;<span class="t-val">15 May 1994</span><br>
+          <span class="t-key">Languages</span>&nbsp;&nbsp;&rarr;&nbsp;<span class="t-val">Hindi, English</span><br>
+          <span class="t-key">Hobbies</span>&nbsp;&nbsp;&nbsp;&nbsp;&rarr;&nbsp;<span class="t-str">Bicycling, Exploring new places</span><br>
+          <span class="t-key">Mobility</span>&nbsp;&nbsp;&nbsp;&rarr;&nbsp;<span class="t-str">Open to relocate &amp; travel</span><br>
+          <span class="t-comment">// Warning: may debug your hospital systems unprompted</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-text">yogendra.singh &middot; jaipur &middot; in &middot; 2025</div>
+    <div class="footer-text">
+      <span style="color:var(--accent2)">const</span> <span style="color:var(--accent)">career</span> = <span style="color:var(--accent3)">"still compiling&hellip;"</span>
+    </div>
+  </footer>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">
+  <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+  Print / Save PDF
+</button>
+
+<script>
+  function toggleExp(card) {
+    var isActive = card.classList.contains('active');
+    document.querySelectorAll('.exp-card').forEach(function(c) {
+      c.classList.remove('active');
+      var t = c.querySelector('.exp-toggle');
+      if (t) t.innerHTML = '&#9658; click to expand';
+    });
+    if (!isActive) {
+      card.classList.add('active');
+      var t = card.querySelector('.exp-toggle');
+      if (t) t.innerHTML = '&#9662; click to collapse';
+    }
+  }
+</script>
+</body>
+</html>
